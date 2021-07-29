@@ -90,6 +90,7 @@ class ArticlePage extends StatelessWidget {
                Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: <Widget>[
+                   //Author Photo
                    Padding(
                      padding: const EdgeInsets.only(left: 8.0),
                      child: ClipRRect(
@@ -97,23 +98,35 @@ class ArticlePage extends StatelessWidget {
                        borderRadius: BorderRadius.circular(50),
                      ),
                    ),
-                   Padding(
-                     padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0, right: 5.0),
-                     child: TextButton(
-                       onPressed: (){},
-                       child: Text(
-                         article.author,
-                         style: authorText,
+                   //Author Name
+                   Expanded(
+                     flex: 2,
+                       child: Container(
+                         padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0, right: 5.0),
+                         child: TextButton(
+                           onPressed: (){},
+                           child: Text(
+                             article.author,
+                             style: authorText,
+                             overflow: TextOverflow.ellipsis,
+                           ),
+                         ),
                        ),
-                     ),
                    ),
-                   Text(
-                     ' ￮ ' + article.date + ' ￮ ' + article.readTime + 'm read',
-                     style: dateTimeRead,
+                   //Article Date
+                   Expanded(
+                     flex: 2,
+                       child: Text(
+                         ' ￮ ' + article.date + ' ￮ ' + article.readTime + 'm read',
+                         style: dateTimeRead,
+                       ),
                    ),
                    //Bookmark Feature
                    Expanded(
-                     child: BookmarkButton(),
+                     child: Container(
+                       alignment: Alignment.centerRight,
+                       child: BookmarkButton()
+                     ),
                    )
                  ],
                ),
