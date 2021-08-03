@@ -1,44 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_blog_app/articles.dart';
 import 'package:mobile_blog_app/article_page.dart';
+import 'package:mobile_blog_app/bottom_navbar.dart';
 
-class MainPage extends StatelessWidget {
-  //Heading Style
-  var headStyle = TextStyle(
-    fontSize: 25, fontWeight: FontWeight.bold, color: Colors.purple
-  );
-
-  //Description Style
-  var descStyle = TextStyle(
-    fontSize: 16, color: Colors.grey
-  );
-
-  //Author Text Style
-  var authorText = TextStyle(
-    fontSize: 16,color: Colors.purple, fontWeight: FontWeight.bold
-  );
+class ExplorePage extends StatelessWidget {
+  //Categories List
+  final List<String> categories = ['Sport','Food','Technology','Science','Automotive','Economy','Hobby','Self'];
 
   //Search Style
-  var searchStyle = TextStyle(
+  final searchStyle = TextStyle(
       color: Colors.grey,
       fontSize: 18
   );
 
-  //Article Title Style
-  var titleText = TextStyle(
-    fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold
-  );
-
-  //Date And Time Read Style
-  var dateTimeRead = TextStyle(
-    fontSize: 13, color: Colors.grey
-  );
-
   //Search Button Color (0xff + HEX)
-  var opacityGrey = Color(0xFFF9F9FB);
+  final searchBtn = Color(0xFFF9F9FB);
 
   //Categories Button
-  var categoriesButton = ButtonStyle(
+  final categoriesButton = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(const Color(0xfff9973e)),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -47,12 +26,9 @@ class MainPage extends StatelessWidget {
     ),
   );
 
-  var categoriesText = TextStyle(
+  final categoriesText = TextStyle(
       fontSize: 14
   );
-
-  //Categories List
-  List<String> categories = ['Sport','Food','Technology','Science','Automotive','Economy','Hobby','Self'];
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +36,7 @@ class MainPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
               //Column Page
               child: Column(
                 children: <Widget>[
@@ -69,7 +45,7 @@ class MainPage extends StatelessWidget {
                     children: <Widget>[
                       Text(
                           'Explore',
-                          style: headStyle
+                          style: Theme.of(context).textTheme.headline1
                       ),
                     ],
                   ),
@@ -78,7 +54,7 @@ class MainPage extends StatelessWidget {
                   Row(
                       children: <Widget>[
                         Text("Discover things you don't know about",
-                            style: descStyle
+                            style: Theme.of(context).textTheme.subtitle1
                         ),
                       ]
                   ),
@@ -89,7 +65,7 @@ class MainPage extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         height: 45,
-                        color: opacityGrey,
+                        color: searchBtn,
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: Row(
                           children: <Widget>[
@@ -132,14 +108,16 @@ class MainPage extends StatelessWidget {
                       },
                     ),
                   ),
+                  //Break Lines
                   Padding(
-                    padding: const EdgeInsets.only(top: 14, bottom: 10),
+                    padding: const EdgeInsets.only(top: 14, bottom: 25),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 1,
                       color: Color(0xFFf2f2f2),
                     ),
                   ),
+                  //List Articles
                   ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
@@ -167,12 +145,13 @@ class MainPage extends StatelessWidget {
                               ],
                             ),
                             child: Card(
+                              margin: EdgeInsets.only(bottom: 12),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   //Article Illustration
                                   Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Padding(
                                         padding: const EdgeInsets.only(top: 12.0,bottom: 8.0),
                                         child: Image.network(article.imageAsset),
@@ -187,7 +166,9 @@ class MainPage extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           //Article Author
-                                          Row(
+                                          Container(
+                                            height: 22,
+                                            child: Row(
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(left: 8.0),
@@ -200,17 +181,26 @@ class MainPage extends StatelessWidget {
                                                 padding: const EdgeInsets.only(left: 8.0),
                                                 child: Text(
                                                   article.author,
-                                                  style: authorText,
+                                                  style: Theme.of(context).textTheme.bodyText1,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],
                                           ),
+                                          ),
                                           //Article Title
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
-                                            child: Text(
-                                              article.title,
-                                              style: titleText,
+                                          ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                minHeight: 10.0,
+                                                maxHeight: 100.0,
+                                              ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                                              child: Text(
+                                                article.title,
+                                                style: Theme.of(context).textTheme.headline2,
+                                                overflow: TextOverflow.fade,
+                                              ),
                                             ),
                                           ),
                                           //Article Date & Read Time
@@ -220,7 +210,7 @@ class MainPage extends StatelessWidget {
                                                 padding: const EdgeInsets.only(left: 8.0,right: 2.0,bottom: 14.0),
                                                 child: Text(
                                                   article.date + ' ￮ ' + article.readTime + 'm read',
-                                                  style: dateTimeRead,
+                                                  style: Theme.of(context).textTheme.bodyText2,
                                                 ),
                                               ),
                                             ],
@@ -242,48 +232,7 @@ class MainPage extends StatelessWidget {
             )
         ),
       ),
-      bottomNavigationBar: BottomNavBar()
-    );
-  }
-}
-
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedNavBar = 0;
-
-  void _ChangeSelectedNavBar(int index) {
-    setState(() {
-      _selectedNavBar = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.deepPurple,
-      unselectedItemColor: Colors.grey,
-      type: BottomNavigationBarType.fixed,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore),
-          label: 'Explore',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.bookmark),
-          label: 'Bookmark',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Profile',
-        )
-      ],
-      showUnselectedLabels: true,
-      currentIndex: _selectedNavBar,
-      onTap: _ChangeSelectedNavBar,
+      bottomNavigationBar: BottomNavBar(1)
     );
   }
 }

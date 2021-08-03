@@ -1,38 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_blog_app/articles.dart';
+import 'package:mobile_blog_app/bookmark_widget.dart';
 
 class ArticlePage extends StatelessWidget {
   final Article article;
 
-  var headArticle = TextStyle(
+  final headArticle = TextStyle(
     fontSize: 22,
     color: Colors.deepPurple,
     fontWeight: FontWeight.bold
   );
 
-  var titleText = TextStyle(
+  final titleText = TextStyle(
     fontSize: 22,
     color: Colors.deepPurple,
     fontWeight: FontWeight.bold
   );
 
   //Author Text Style
-  var authorText = TextStyle(
+  final authorText = TextStyle(
       fontSize: 18,color: Colors.purple, fontWeight: FontWeight.bold
   );
 
   //Date And Time Read Style
-  var dateTimeRead = TextStyle(
+  final dateTimeRead = TextStyle(
       fontSize: 16, color: Colors.grey
   );
 
   //ArticleBody
-  var articleBody = TextStyle(
+  final articleBody = TextStyle(
     fontSize: 19, color: Colors.deepPurple,
   );
 
-  ArticlePage(@required this.article);
+  ArticlePage(this.article);
 
   @override
   Widget build(BuildContext context) {
@@ -157,27 +158,5 @@ class ArticlePage extends StatelessWidget {
        ),
       )
     );
-  }
-}
-
-class BookmarkButton extends StatefulWidget {
-  @override
-  _BookmarkButtonState createState() => _BookmarkButtonState();
-}
-
-class _BookmarkButtonState extends State<BookmarkButton> {
-  bool isBookmark = false;
-
-  @override
-  Widget build(BuildContext context){
-    return IconButton(
-        onPressed: () {
-          setState(() {
-            isBookmark = !isBookmark;
-          });
-        },
-        icon: Icon(
-          isBookmark ? Icons.bookmark : Icons.bookmark_border, color: Colors.deepPurple,
-        ));
   }
 }

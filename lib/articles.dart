@@ -1,4 +1,5 @@
 class Article {
+  String id;
   String title;
   String categories;
   String author;
@@ -9,6 +10,7 @@ class Article {
   String imageAsset;
 
   Article({
+    required this.id,
     required this.title,
     required this.categories,
     required this.author,
@@ -22,6 +24,7 @@ class Article {
 
 var articleList = [
   Article(
+    id: '0',
     title: 'A Simple Workout That Makes a Huge Difference',
     categories: 'Sport',
     author: 'Anna Maltby',
@@ -58,6 +61,7 @@ var articleList = [
   ),
 
   Article(
+      id: '1',
       title: 'We’re Overworked, and Everyone Just Needs to Lie Down',
       categories: 'Hobby',
       author: 'Kaki Okumura',
@@ -101,6 +105,7 @@ var articleList = [
   ),
 
   Article(
+      id: '2',
       title: 'Why Smart Girls Think Body Positivity is a Lie',
       categories: 'Self',
       author: 'Nandini Maharaj, PhD',
@@ -194,6 +199,7 @@ var articleList = [
   ),
 
   Article(
+      id: '3',
       title: 'The Most Useful Writing Advice I’ve Ever Been Given',
       categories: 'Hobby',
       author: 'Sadie Hoagland',
